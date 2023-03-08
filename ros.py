@@ -7,19 +7,13 @@ then detects and marks features in that image. It finally displays
 and publishes the new image - again as CompressedImage topic.
 """
 __author__ =  'Simon Haller <simon.haller at uibk.ac.at>'
-__version__=  '0.1'
+__version__=  '0.1.1'
 __license__ = 'BSD'
-# Python libs
-import sys, time
 
-# numpy and scipy
+import sys, time
 import numpy as np
 from scipy.ndimage import filters
-
-# OpenCV
 import cv2
-
-# Ros libraries
 import roslib
 import rospy
 
@@ -28,10 +22,9 @@ from sensor_msgs.msg import CompressedImage
 # We do not use cv_bridge it does not support CompressedImage in python
 # from cv_bridge import CvBridge, CvBridgeError
 
-VERBOSE=False
+VERBOSE=True
 
 class image_feature:
-
     def __init__(self):
         '''Initialize ros publisher, ros subscriber'''
         # topic where we publish
@@ -40,11 +33,10 @@ class image_feature:
         # self.bridge = CvBridge()
 
         # subscribed Topic
-        self.subscriber = rospy.Subscriber("/camera/image/compressed",
+        self.subscriber = rospy.Subscriber("/usb_cam/image_raw/compressed",
             CompressedImage, self.callback,  queue_size = 1)
         if VERBOSE :
-            print "subscribed to /camera/image/compressed"
-
+            print "subscribed to /usb_cam/image_raw/compressed"
 
     def callback(self, ros_data):
         '''Callback function of subscribed topic.
