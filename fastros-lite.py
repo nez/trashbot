@@ -10,12 +10,13 @@ from fastai.vision.all import *
 from fastai.data.external import *
 from time import sleep
 import timm
-
 from sensor_msgs.msg import CompressedImage
+
+# https://answers.ros.org/question/330654/how-to-connect-remote-roscore-with-python-in-runtime/
 
 VERBOSE=True
 
-learn = load_learner('trashsort.pkl')
+learn = load_learner('trashsort-lite.pkl')
 
 processing = False
 
